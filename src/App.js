@@ -36,7 +36,13 @@ class BooksApp extends React.Component {
         
       });
     }
+  }
 
+  moveBook(book, shelf){
+    
+      BooksAPI.update(book, shelf).then((response)=>{
+        console.log(response);
+      });
   }
 
   render() {
@@ -46,12 +52,21 @@ class BooksApp extends React.Component {
         <div className="app">
           <Route
             path='/add'
-            render={()=>(<SearchBooks query={this.state.query} found={this.state.found} onChange={(term)=>(this.search(term))}/>)}
+            render={()=>(
+            <SearchBooks
+              query={this.state.query}
+              found={this.state.found}
+              onChange={(term)=>(this.search(term))}
+              onBookMove={this.moveBook}/>)}
             />
           <Route
             exact
             path='/'
-            render={()=>(<BooksList books={this.state.books} title={this.state.title} />)}
+            render={()=>(
+            <BooksList
+              books={this.state.books}
+              title={this.state.title}
+              onBookMove={this.moveBook}/>)}
             />
         </div>
       </BrowserRouter>

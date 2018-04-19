@@ -6,7 +6,7 @@ class BooksList extends React.Component {
 
     render() {
 
-      const {books, title} = this.props;
+      const {books, title,onBookMove} = this.props;
 
       let shelfs = books.map((book)=>{return book.shelf}).filter((value, index, self)=>{return self.indexOf(value) === index});
 
@@ -25,7 +25,7 @@ class BooksList extends React.Component {
                       shelfs.map((shelf)=>{
 
                         let affactedBooks = books.filter((book)=>{return book.shelf === shelf});
-                        return (<BooksShelf title={shelf} books={affactedBooks} key={shelf}/>);
+                        return (<BooksShelf title={shelf} books={affactedBooks} key={shelf} onBookMove={onBookMove}/>);
 
                       })
 

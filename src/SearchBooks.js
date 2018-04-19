@@ -11,7 +11,7 @@ class SearchBooks extends React.Component {
 
   render(){
 
-    const {query, found, onChange} = this.props;
+    const {query, found, onChange,onBookMove} = this.props;
 
 
     return (<div className="search-books">
@@ -35,7 +35,7 @@ class SearchBooks extends React.Component {
           { 
               found && found.map((book)=>{
                 return (<li key={book.id}>
-                  <Book book={book}/>
+                  <Book book={book} onBookMove={onBookMove}/>
                 </li>)
               })
             }
