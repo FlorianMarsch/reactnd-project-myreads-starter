@@ -6,7 +6,7 @@ class Book extends React.Component {
     render() {
 
         const {book,onBookMove} = this.props;
-        const thumbnail = book.imageLinks.thumbnail;
+        const thumbnail = book.imageLinks ?  book.imageLinks.thumbnail:'';
         return (
 
             <div className="book">
