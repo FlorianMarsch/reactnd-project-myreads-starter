@@ -25,9 +25,15 @@ class BooksApp extends React.Component {
     if(!term || term.trim() === ''){
       this.setState({found:[]});
     }else{
-      BooksAPI.search(term).then((found)=>{
-        console.log(found);
-        this.setState({found:found});
+      BooksAPI.search(term).then((response)=>{
+        console.log(response);
+        if(response.items){
+          //error handling
+          this.setState({found:response.items});
+        }else{
+          this.setState({found:response});
+        }
+        
       });
     }
 
