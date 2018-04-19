@@ -8,7 +8,9 @@ import './App.css'
 class BooksApp extends React.Component {
   state = {
     books:[],
-    title : 'MyReads'
+    title : 'MyReads',
+    query :'',
+    found :[]
   }
 
   componentDidMount(){
@@ -18,6 +20,19 @@ class BooksApp extends React.Component {
     });
   }
 
+  search(term){
+    this.setState({query:term});
+    if(!term || term.trim() === ''){
+      this.setState({found:[]});
+    }else{
+      BooksAPI.search(term).then((found)=>{
+        console.log(found);
+        this.setState({found:found});
+      });
+    }
+
+  }
+
   render() {
 
     return (
@@ -25,7 +40,7 @@ class BooksApp extends React.Component {
         <div className="app">
           <Route
             path='/add'
-            render={()=>(<SearchBooks/>)}
+            render={()=>(<SearchBooks query={this.state.query} found={this.state.found} onChange={(term)=>(this.search(term))}/>)}
             />
           <Route
             exact
