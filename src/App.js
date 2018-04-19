@@ -56,7 +56,7 @@ class BooksApp extends React.Component {
       <BrowserRouter>
         <div className="app">
           <Route
-            path='/add'
+            path='/search'
             render={()=>(
             <SearchBooks
               query={this.state.query}
