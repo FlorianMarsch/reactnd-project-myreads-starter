@@ -38,10 +38,15 @@ class BooksApp extends React.Component {
     }
   }
 
-  moveBook(book, shelf){
+  moveBook = (book, shelf) => {
     
       BooksAPI.update(book, shelf).then((response)=>{
-        console.log(response);
+        book.shelf = shelf;
+        this.setState(state => ({
+          // remove changed book first via filter
+          // them concat the the instance
+          books: state.books.filter(b => b.id !== book.id).concat([ book ])
+        }))
       });
   }
 
